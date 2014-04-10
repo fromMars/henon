@@ -21,40 +21,36 @@ except Exception as err_input:
 
 vertics = get_all(a, b, x, y, count)
 p_count = len(vertics)/2
-#print vertics
 print 'p_count: %s' % p_count
-
-
-# enlarge the graph
-larger_list = []
-for i in range(p_count*2):
-	if i%2 == 0:
-		larger_list.append(vertics[i]*200 + 512)
-	else:
-		larger_list.append(vertics[i]*800 + 384)
-
-#print larger_list
 
 
 # create pyglet window for displaying
 platform = pyglet.window.get_platform()
 display = platform.get_default_display()
 screen = display.get_default_screen()
-
 template = pyglet.gl.Config(alpha_size=8)
 config = screen.get_best_config(template)
 context = config.create_context(None)
-window = pyglet.window.Window(context=context, fullscreen=True)
-#window.set_size(1024, 768)
+window = pyglet.window.Window(context=context)
+window.set_size(1600, 1050)
+
+# get window location & size
+lx, ly = window.get_location()
+sx, sy = window.get_size()
+
+
+# enlarge the graph
+larger_list = []
+for i in range(0, p_count, 2):
+	larger_list.append(vertics[i]*sx/6*1.2 + x+sx/2)
+	larger_list.append(vertics[i+1]*sy*1.2 + y+sy/2)
 
 
 @window.event()
 def on_draw():
-	for i in range(p_count):
+	for i in range(0, p_count, 2):
 		tmp_point = [larger_list[i], larger_list[i+1]]
 		pyglet.graphics.draw(1, pyglet.gl.GL_POINTS, ('v2f', tmp_point))
-		
-		#i += 1
 		
 	
 	#pyglet.graphics.draw(p_count, pyglet.gl.GL_POINTS, ('v2f', larger_list))
