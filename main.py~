@@ -1,3 +1,5 @@
+#!/usr/bin/python2.7
+
 import pyglet
 import sys
 from henon import get_all
