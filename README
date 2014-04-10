@@ -1,0 +1,5 @@
+A henon map a=1.4 b=0.3 by python.
+henon.py: get the points list
+main.py: draw the map
+
+
